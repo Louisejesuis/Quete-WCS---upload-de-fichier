@@ -1,7 +1,7 @@
 <?php
 
 $directory = 'upload/';
-$max_size = 1000000;
+$max_size = 10000000;
 $extensions = array('png', 'gif', 'jpg', 'jpeg');
 
 if (isset($_POST['submit'])) {
@@ -21,19 +21,10 @@ if (isset($_POST['submit'])) {
                         echo 'Echec de l\'upload !';
                     }
                 }else {
-                    echo 'Le fichier est trop gros...';
+                    echo 'Le fichier est trop gros';
                 }
             }
         }
-    }
-}
-
-if (isset($_GET['file']))
-{
-    if (file_exists($directory . $_GET['file']))
-    {
-     unlink($directory . $_GET['file']);
-     header('Location : upload.php');
     }
 }
 ?>
@@ -71,7 +62,10 @@ if (isset($_GET['file']))
                             <img src="<?= $directory . $fileinfo->getFilename(); ?>" alt="...">
                             <div class="caption">
                                 <h3><?= $fileinfo->getFilename(); ?></h3>
-                                <a href="upload.php?file=<?= $fileinfo->getFilename()?>" class="btn btn-danger" role="button" value="<?php unlink($filename) ?>">Delete</a>
+                                <form action="delete.php" method="get">
+                                    <input type="hidden" name="image" value="<?= $fileinfo->getFilename(); ?>">
+                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                </form>
                             </div>
                         </div>
                     </div>

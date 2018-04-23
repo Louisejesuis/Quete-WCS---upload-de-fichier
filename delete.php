@@ -6,9 +6,9 @@
  * Time: 10:55
  */
 
-if (file_exists('upload/' . $_GET['image'] ))
+if (file_exists('upload/' . $_POST['filename'] ))
 {
-    unlink('upload/' . $_GET['image']);
+    unlink('upload/' . $_POST['filename']);
 }
 
 header("Location:index.php");
